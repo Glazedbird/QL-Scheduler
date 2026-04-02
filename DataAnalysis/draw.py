@@ -16,6 +16,7 @@ args = parser.parse_args()
 ## 本文件中常量
 output_path = "./results/" + config["model"] + "_describe.csv"
 input_path = "./data/data" + config["model"] + ".csv"
+fig_output_path_prefix = "./figures/" + config["model"]
 
 os.makedirs("figures", exist_ok=True)
 os.makedirs("results", exist_ok=True)
@@ -40,10 +41,10 @@ for col in avg_cols:
     plt.plot(x, df1[col], marker="o")
     plt.xlabel("run index")
     plt.ylabel(col)
-    plt.title(f"{col} over repeated runs (mode=1)")
+    plt.title(f"{col} over repeated runs (mode={args.mode})")
     plt.grid(True)
     plt.tight_layout()
-    plt.savefig(f"figures/{col}_line.png", dpi=300, bbox_inches="tight")
+    plt.savefig(f"{fig_output_path_prefix}/{col}_line.png", dpi=300, bbox_inches="tight")
     plt.close()
 
 # 平均指标箱线图
@@ -51,9 +52,9 @@ for col in avg_cols:
     plt.figure(figsize=(5, 4))
     plt.boxplot(df1[col])
     plt.ylabel(col)
-    plt.title(f"Boxplot of {col} (mode=1)")
+    plt.title(f"Boxplot of {col} (mode={args.mode})")
     plt.tight_layout()
-    plt.savefig(f"figures/{col}_box.png", dpi=300, bbox_inches="tight")
+    plt.savefig(f"{fig_output_path_prefix}/{col}_box.png", dpi=300, bbox_inches="tight")
     plt.close()
 
 # 总量指标折线图
@@ -62,10 +63,10 @@ for col in total_cols:
     plt.plot(x, df1[col], marker="o")
     plt.xlabel("run index")
     plt.ylabel(col)
-    plt.title(f"{col} over repeated runs (mode=1)")
+    plt.title(f"{col} over repeated runs (mode={args.mode})")
     plt.grid(True)
     plt.tight_layout()
-    plt.savefig(f"figures/{col}_line.png", dpi=300, bbox_inches="tight")
+    plt.savefig(f"{fig_output_path_prefix}/{col}_line.png", dpi=300, bbox_inches="tight")
     plt.close()
 
 # 散点图
@@ -73,10 +74,10 @@ plt.figure(figsize=(6, 5))
 plt.scatter(df1["total_sched"], df1["total_wait"])
 plt.xlabel("total_sched")
 plt.ylabel("total_wait")
-plt.title("total_wait vs total_sched (mode=1)")
+plt.title("total_wait vs total_sched (mode={args.mode})")
 plt.grid(True)
 plt.tight_layout()
-plt.savefig("figures/total_wait_vs_total_sched.png", dpi=300, bbox_inches="tight")
+plt.savefig(f"{fig_output_path_prefix}/total_wait_vs_total_sched.png", dpi=300, bbox_inches="tight")
 plt.close()
 
 print("\n统计结果已保存到" + output_path + ".csv")
