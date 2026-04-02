@@ -12,16 +12,16 @@ with open("./rawdata/log.txt") as f:
     for line in f:
         if line.startswith("SUMMARY"):
             p = line.strip().split(",")
-
+            n = int(p[2])
             rows.append({
                 "mode": int(p[1]),
                 "n": int(p[2]),
-                "avg_turnaround": int(p[3]),
-                "avg_response": int(p[4]),
-                "avg_wait": int(p[5]),
-                "avg_run": int(p[6]),
-                "avg_sleep": int(p[7]),
-                "avg_sched": int(p[8]),
+                "avg_turnaround": int(p[3]) / n,
+                "avg_response": int(p[4]) / n,
+                "avg_wait": int(p[5]) / n,
+                "avg_run": int(p[6]) / n,
+                "avg_sleep": int(p[7]) / n,
+                "avg_sched": int(p[8]) / n,
                 "total_turnaround": int(p[9]),
                 "total_response": int(p[10]),
                 "total_wait": int(p[11]),
