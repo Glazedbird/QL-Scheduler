@@ -1,4 +1,4 @@
-#define EPOSILON 10
+#define EPOSILON 0
 
 #define ALPHA   100    // 0.1
 #define GAMMA   900    // 0.9

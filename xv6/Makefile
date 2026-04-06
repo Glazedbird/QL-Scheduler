@@ -148,7 +148,7 @@ UPROGS=\
 	$U/_logstress\
 	$U/_forphan\
 	$U/_dorphan\
-	$U/_freememtest\
+	$U/_saveq\
 	$U/_test\
 	$U/_workload\
 	$U/_cpu_long\
