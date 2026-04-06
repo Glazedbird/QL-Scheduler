@@ -1,0 +1,1019 @@
+riscv64-unknown-elf-gcc -Wall -Werror -Wno-unknown-attributes -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -march=rv64gc -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -fno-builtin-strncpy -fno-builtin-strncmp -fno-builtin-strlen -fno-builtin-memset -fno-builtin-memmove -fno-builtin-memcmp -fno-builtin-log -fno-builtin-bzero -fno-builtin-strchr -fno-builtin-exit -fno-builtin-malloc -fno-builtin-putc -fno-builtin-free -fno-builtin-memcpy -Wno-main -fno-builtin-printf -fno-builtin-fprintf -fno-builtin-vprintf -I. -fno-stack-protector -fno-pie -no-pie   -c -o kernel/proc.o kernel/proc.c
+riscv64-unknown-elf-gcc -Wall -Werror -Wno-unknown-attributes -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -march=rv64gc -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -fno-builtin-strncpy -fno-builtin-strncmp -fno-builtin-strlen -fno-builtin-memset -fno-builtin-memmove -fno-builtin-memcmp -fno-builtin-log -fno-builtin-bzero -fno-builtin-strchr -fno-builtin-exit -fno-builtin-malloc -fno-builtin-putc -fno-builtin-free -fno-builtin-memcpy -Wno-main -fno-builtin-printf -fno-builtin-fprintf -fno-builtin-vprintf -I. -fno-stack-protector -fno-pie -no-pie   -c -o kernel/rl.o kernel/rl.c
+riscv64-unknown-elf-gcc -Wall -Werror -Wno-unknown-attributes -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -march=rv64gc -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -fno-builtin-strncpy -fno-builtin-strncmp -fno-builtin-strlen -fno-builtin-memset -fno-builtin-memmove -fno-builtin-memcmp -fno-builtin-log -fno-builtin-bzero -fno-builtin-strchr -fno-builtin-exit -fno-builtin-malloc -fno-builtin-putc -fno-builtin-free -fno-builtin-memcpy -Wno-main -fno-builtin-printf -fno-builtin-fprintf -fno-builtin-vprintf -I. -fno-stack-protector -fno-pie -no-pie   -c -o kernel/qtable_store.o kernel/qtable_store.c
+riscv64-unknown-elf-ld -z max-page-size=4096 -T kernel/kernel.ld -o kernel/kernel kernel/entry.o kernel/start.o kernel/console.o kernel/printf.o kernel/uart.o kernel/kalloc.o kernel/spinlock.o kernel/string.o kernel/main.o kernel/vm.o kernel/proc.o kernel/swtch.o kernel/trampoline.o kernel/trap.o kernel/syscall.o kernel/sysproc.o kernel/bio.o kernel/fs.o kernel/log.o kernel/sleeplock.o kernel/file.o kernel/pipe.o kernel/exec.o kernel/sysfile.o kernel/kernelvec.o kernel/plic.o kernel/virtio_disk.o kernel/rl.o kernel/rand.o kernel/qtable_store.o  
+riscv64-unknown-elf-objdump -S kernel/kernel > kernel/kernel.asm
+riscv64-unknown-elf-objdump -t kernel/kernel | sed '1,/SYMBOL TABLE/d; s/ .* / /; /^$/d' > kernel/kernel.sym
+qemu-system-riscv64 -machine virt -bios none -kernel kernel/kernel -m 128M -smp 3 -nographic -global virtio-mmio.force-legacy=false -drive file=fs.img,if=none,format=raw,id=x0 -device virtio-blk-device,drive=x0,bus=virtio-mmio-bus.0
+
+xv6 kernel is booting
+
+hart 2 starting
+hart 1 starting
+[DEBUG] before qtable get inode...
+[DEBUG] before qtable path...
+init: starting sh
+$ worload    kload 2 100
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begicpcpu_short begcpiu_snhorst b!
+ns!
+egins!u_
+short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,34,0,42,21,0,55,34,0,42,21,0,55
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!cpu_short begins!
+
+cpu_short begins!
+cpu_short begins!
+cpu_shorcput begins!
+_short begins!
+SUMMARY,2,8,34,0,49,22,0,46,34,0,49,22,0,46
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,38,0,62,21,0,47,38,0,62,21,0,47
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short becpu_short begins!
+gins!
+SUMMARY,2,8,34,0,47,22,0,44,34,0,47,22,0,44
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,34,0,44,22,0,46,34,0,44,22,0,46
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begincpu_short begins!
+s!
+cpu_long begins!
+SUMMARY,2,8,37,6,50,22,0,42,37,6,50,22,0,42
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,32,0,42,22,0,43,32,0,42,22,0,43
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short cpu_short begins!
+begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,36,6,45,22,0,41,36,6,45,22,0,41
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,35,0,39,22,0,49,35,0,39,22,0,49
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begincpsu_short begins!
+cpu_short begins!
+cpu_short begins!
+!
+cpu_short begins!
+SUMMARY,2,8,38,0,44,22,0,47,38,0,44,22,0,47
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,37,1,43,22,0,44,37,1,43,22,0,44
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,32,0,39,21,0,43,32,0,39,21,0,43
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begcpu_short begins!
+cpu_short begins!
+ins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,39,7,61,21,0,42,39,7,61,21,0,42
+WORKLOAD START mode=2
+cpu_long begins!cpu_
+long begins!
+cpu_short begins!
+cpu_short begins!
+cpcpu_short begcpu_short beginu_isnhso!
+rt begins!
+cpu_short begins!
+s!
+SUMMARY,2,8,35,0,51,22,0,50,35,0,51,22,0,50
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,38,3,55,22,0,49,38,3,55,22,0,49
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short beginsc!pu_short begins!
+
+SUMMARY,2,8,34,3,49,20,0,47,34,3,49,20,0,47
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_short begins!
+cpu_long begins!
+cpu_short cpu_short begins!
+begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,39,0,56,21,0,46,39,0,56,21,0,46
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,34,2,34,22,0,41,34,2,34,22,0,41
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!cpu_short begins!
+cpu_short begins!
+
+cpu_short begins!
+cpu_short begins!
+cpu_short begcinsp!
+u_short begins!
+SUMMARY,2,8,31,0,36,23,0,50,31,0,36,23,0,50
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,31,0,33,21,0,44,31,0,33,21,0,44
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short bcpu_short begins!
+egins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,34,2,41,21,0,37,34,2,41,21,0,37
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,33,0,40,20,0,42,33,0,40,20,0,42
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,46,7,85,21,0,48,46,7,85,21,0,48
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,35,3,33,23,0,38,35,3,33,23,0,38
+WORKLOAD START mode=2
+cpu_long begins!cpu
+_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,40,0,59,24,0,58,40,0,59,24,0,58
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,45,7,77,22,0,47,45,7,77,22,0,47
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short cpu_short begins!
+cbepguin_shso!rt 
+begins!
+cpu_short begins!
+SUMMARY,2,8,37,4,46,23,0,49,37,4,46,23,0,49
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,33,0,30,22,0,51,33,0,30,22,0,51
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,39,0,50,23,0,51,39,0,50,23,0,51
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short becpu_short begins!
+gins!
+SUMMARY,2,8,34,0,37,22,0,42,34,0,37,22,0,42
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long beginscp!u_short begins!
+cpu_short begins!
+
+cpu_short begins!
+cpu_short begins!
+cpu_short becpu_short begins!
+gins!
+SUMMARY,2,8,36,0,44,23,0,51,36,0,44,23,0,51
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpcpu_short begins!
+cpu_short begu_short begins!
+cpu_shorins!
+t begins!
+SUMMARY,2,8,35,0,37,21,0,46,35,0,37,21,0,46
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,39,0,58,22,0,47,39,0,58,22,0,47
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short cpu_short begins!
+begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,37,7,52,21,0,49,37,7,52,21,0,49
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begincpu_short begins!
+s!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,41,0,59,24,0,47,41,0,59,24,0,47
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,46,0,86,21,0,54,46,0,86,21,0,54
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_shocpu_short cpu_short begins!
+bergt begins!
+cpu_short begins!
+cpu_short begins!
+ins!
+cpu_short begins!
+SUMMARY,2,8,39,4,52,22,0,40,39,4,52,22,0,40
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,42,5,57,23,0,44,42,5,57,23,0,44
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,42,0,57,24,0,52,42,0,57,24,0,52
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begicnsp!u
+_short cpu_short begins!
+bcpegins!
+u_short begins!
+SUMMARY,2,8,37,0,47,20,0,48,37,0,47,20,0,48
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_short begins!
+cpu_shcpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cort pbu_shegins!
+cpu_shoort begins!
+rt begins!
+SUMMARY,2,8,34,0,36,23,0,47,34,0,36,23,0,47
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begincpu_short begins!
+s!
+SUMMARY,2,8,31,6,33,21,0,37,31,6,33,21,0,37
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+cpu_short begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,36,5,46,21,0,42,36,5,46,21,0,42
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+cpucpu_short begins!
+cpu_short begins!
+_long begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,42,5,65,22,0,53,42,5,65,22,0,53
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,31,0,36,20,0,41,31,0,36,20,0,41
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_scpu_short begins!
+hort begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short cpu_short begins!
+begins!
+SUMMARY,2,8,36,0,49,22,0,44,36,0,49,22,0,44
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,27,0,32,19,0,35,27,0,32,19,0,35
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,34,0,46,22,0,44,34,0,46,22,0,44
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+cpu_short begins!
+SUMMARY,2,8,35,0,48,21,0,38,35,0,48,21,0,38
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+SUMMARY,2,8,40,5,58,20,0,46,40,5,58,20,0,46
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_short begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,32,0,41,20,0,44,32,0,41,20,0,44
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,50,0,89,21,0,46,50,0,89,21,0,46
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,37,0,59,20,0,41,37,0,59,20,0,41
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,39,0,29,22,0,44,39,0,29,22,0,44
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short cpu_short begins!
+begins!
+SUMMARY,2,8,39,0,47,25,0,41,39,0,47,25,0,41
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_short beginsc!p
+u_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,41,0,55,21,0,44,41,0,55,21,0,44
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begincpu_short begins!
+s!
+SUMMARY,2,8,32,0,36,22,0,43,32,0,36,22,0,43
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_cpu_short beginsc!
+pu_short begins!
+short begins!
+SUMMARY,2,8,37,0,48,21,0,47,37,0,48,21,0,47
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,43,0,68,24,0,53,43,0,68,24,0,53
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begincpu_short begins!cpu_short begins!
+s!
+
+SUMMARY,2,8,42,3,49,24,0,47,42,3,49,24,0,47
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,29,4,33,20,0,37,29,4,33,20,0,37
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,43,6,74,21,0,48,43,6,74,21,0,48
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_short begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,36,0,44,22,0,47,36,0,44,22,0,47
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_short begins!
+cpu_long begicpu_short begins!
+ns!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,35,0,46,22,0,42,35,0,46,22,0,42
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+SUMMARY,2,8,36,7,49,21,0,41,36,7,49,21,0,41
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,37,7,55,21,0,42,37,7,55,21,0,42
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short beginsc!
+pu_short begins!
+cpu_long begins!
+SUMMARY,2,8,31,2,36,22,0,41,31,2,36,22,0,41
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+cpu_long begins!
+ccpu_short begins!
+pu_short begins!
+SUMMARY,2,8,32,0,35,21,0,43,32,0,35,21,0,43
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,40,5,50,23,0,41,40,5,50,23,0,41
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_short begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,32,0,36,21,0,48,32,0,36,21,0,48
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,31,0,31,22,0,38,31,0,31,22,0,38
+WORKLOAD START mode=2
+cpu_short begcinpu_shorst !
+cpu_short begins!
+cpu_short begins!
+begins!
+cpu_long begins!
+cpu_long begins!
+cpu_short begicpu_short begins!
+ns!
+SUMMARY,2,8,38,7,48,21,0,45,38,7,48,21,0,45
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+cpu_short begins!
+SUMMARY,2,8,38,6,50,21,0,53,38,6,50,21,0,53
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,31,0,39,21,0,41,31,0,39,21,0,41
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+SUMMARY,2,8,30,0,33,20,0,39,30,0,33,20,0,39
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,42,0,51,22,0,42,42,0,51,22,0,42
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+cpu_short begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,30,0,38,20,0,40,30,0,38,20,0,40
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,30,0,28,22,0,45,30,0,28,22,0,45
+WORKLOAD START mode=2
+cpu_long beginscp!u_lo
+ng begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,42,0,66,25,0,59,42,0,66,25,0,59
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_short begins!
+cpu_scpu_short begins!
+cpu_hort begins!
+cpu_long begins!
+cpu_short begins!
+long begins!
+cpu_short begins!
+SUMMARY,2,8,34,1,30,21,0,40,34,1,30,21,0,40
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,34,0,42,20,0,47,34,0,42,20,0,47
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_short beginsc!pu_short begins!
+cpu_short begincpu_long begins!
+cpu_long begins!
+cp
+cpu_short begins!
+u_short begins!
+s!
+SUMMARY,2,8,31,0,35,21,0,37,31,0,35,21,0,37
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+cpu_short begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,38,4,42,23,0,41,38,4,42,23,0,41
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_locpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+ng begins!
+SUMMARY,2,8,34,7,50,21,0,38,34,7,50,21,0,38
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+SUMMARY,2,8,34,0,31,24,0,44,34,0,31,24,0,44
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_short begins!
+cpu_short begcpu_short begins!
+ins!
+cpu_cpu_short begins!
+cpu_short begins!
+long begins!
+cpu_short begins!
+SUMMARY,2,8,38,0,50,22,0,54,38,0,50,22,0,54
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_long begins!
+cpu_short begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,32,0,37,20,0,40,32,0,37,20,0,40
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+SUMMARY,2,8,34,5,45,23,0,37,34,5,45,23,0,37
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_long begins!
+cpu_short begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,40,8,57,20,0,46,40,8,57,20,0,46
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_short begins!
+cpu_scpu_short begicpu_short begins!
+cpu_short begins!
+cpu_hort begins!
+long begicnpus_!l
+ong begins!
+ns!
+SUMMARY,2,8,32,0,29,23,0,41,32,0,29,23,0,41
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begincps!
+cpu_short begins!
+u_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,40,3,48,22,0,42,40,3,48,22,0,42
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,35,3,40,20,0,43,35,3,40,20,0,43
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,40,7,67,20,0,43,40,7,67,20,0,43
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,31,0,42,20,0,42,31,0,42,20,0,42
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short beginscpu!_s
+hort begins!
+SUMMARY,2,8,42,6,65,22,0,43,42,6,65,22,0,43
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,35,0,44,22,0,45,35,0,44,22,0,45
+WORKLOAD START mode=2
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+cpu_short begins!
+SUMMARY,2,8,38,2,48,23,0,50,38,2,48,23,0,50
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpcpu_short begins!
+cpu_long begins!
+cpu_su_long begins!
+cpu_short begins!
+hort begins!
+SUMMARY,2,8,30,0,25,22,0,39,30,0,25,22,0,39
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_long becpu_long beginsc!p
+u_short begins!
+cpu_shogins!
+cpu_short begins!
+rt begins!
+cpu_short begins!
+cpu_short begins!
+SUMMARY,2,8,39,0,45,23,0,42,39,0,45,23,0,42
+WORKLOAD START mode=2
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+cpu_short begins!
+cpu_short begins!
+cpu_short begins!
+cpu_long begins!
+cpu_short begins!
+SUMMARY,2,8,29,0,28,21,0,44,29,0,28,21,0,44
+WORKLOAD END mode=2
+$ QEMU: Terminated
+

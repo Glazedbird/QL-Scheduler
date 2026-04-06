@@ -9,20 +9,18 @@ with open("config.yaml") as f:
     config = yaml.safe_load(f)
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-mode", type=int, default=0)
-
-args = parser.parse_args()
-
+mode_path = str(config["mode"]) + "/"
+mode = config["mode"]
 ## 本文件中常量
-output_path = "./results/" + config["model"] + "_describe.csv"
+output_path = "./results/" + mode_path + config["model"] + "_describe.csv"
 input_path = "./data/data" + config["model"] + ".csv"
-fig_output_path_prefix = "./figures/" + config["model"]
+fig_output_path_prefix = "./figures/" + mode_path + config["model"]
 
-os.makedirs("figures", exist_ok=True)
-os.makedirs("results", exist_ok=True)
+os.makedirs("./results/" + mode_path , exist_ok=True)
+os.makedirs("./figures/" + mode_path, exist_ok=True)
 
 df = pd.read_csv(input_path)
-df1 = df[df["mode"] == args.mode].copy()
+df1 = df[df["mode"] == mode].copy()
 
 print("基本统计：")
 stats = df1.describe()
@@ -41,7 +39,7 @@ for col in avg_cols:
     plt.plot(x, df1[col], marker="o")
     plt.xlabel("run index")
     plt.ylabel(col)
-    plt.title(f"{col} over repeated runs (mode={args.mode})")
+    plt.title(f"{col} over repeated runs (mode={mode})")
     plt.grid(True)
     plt.tight_layout()
     plt.savefig(f"{fig_output_path_prefix}/{col}_line.png", dpi=300, bbox_inches="tight")
@@ -52,7 +50,7 @@ for col in avg_cols:
     plt.figure(figsize=(5, 4))
     plt.boxplot(df1[col])
     plt.ylabel(col)
-    plt.title(f"Boxplot of {col} (mode={args.mode})")
+    plt.title(f"Boxplot of {col} (mode={mode})")
     plt.tight_layout()
     plt.savefig(f"{fig_output_path_prefix}/{col}_box.png", dpi=300, bbox_inches="tight")
     plt.close()
@@ -63,7 +61,7 @@ for col in total_cols:
     plt.plot(x, df1[col], marker="o")
     plt.xlabel("run index")
     plt.ylabel(col)
-    plt.title(f"{col} over repeated runs (mode={args.mode})")
+    plt.title(f"{col} over repeated runs (mode={mode})")
     plt.grid(True)
     plt.tight_layout()
     plt.savefig(f"{fig_output_path_prefix}/{col}_line.png", dpi=300, bbox_inches="tight")
@@ -74,7 +72,7 @@ plt.figure(figsize=(6, 5))
 plt.scatter(df1["total_sched"], df1["total_wait"])
 plt.xlabel("total_sched")
 plt.ylabel("total_wait")
-plt.title("total_wait vs total_sched (mode={args.mode})")
+plt.title("total_wait vs total_sched (mode={mode})")
 plt.grid(True)
 plt.tight_layout()
 plt.savefig(f"{fig_output_path_prefix}/total_wait_vs_total_sched.png", dpi=300, bbox_inches="tight")
