@@ -10,7 +10,7 @@ int main()
         for(int i = 0; i < 2000000; i++)
             x += i;
 
-        pause(10);
+        pause(3);
     }
 
     exit(0);
