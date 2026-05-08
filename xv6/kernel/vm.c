@@ -18,6 +18,7 @@ extern char etext[];  // kernel.ld sets this to end of kernel code.
 extern char trampoline[]; // trampoline.S
 
 // Make a direct-map page table for the kernel.
+// 构建一个完整的内核页表，以及建立内存映射关系的
 pagetable_t
 kvmmake(void)
 {
@@ -94,6 +95,7 @@ kvminithart()
 //   21..29 -- 9 bits of level-1 index.
 //   12..20 -- 9 bits of level-0 index.
 //    0..11 -- 12 bits of byte offset within the page.
+// 是一个查找的函数。
 pte_t *
 walk(pagetable_t pagetable, uint64 va, int alloc)
 {
@@ -483,4 +485,44 @@ ismapped(pagetable_t pagetable, uint64 va)
     return 1;
   }
   return 0;
+}
+
+static void print_pte_flags(pte_t pte)
+{
+  // 你可以按自己喜好改格式
+  printf(" flags=");
+  printf("%c", (pte&PTE_R)?'R' :'-');
+  printf("%c", (pte&PTE_W)?'W' :'-');
+  printf("%c", (pte&PTE_X)?'X' :'-');
+  printf("%c", (pte&PTE_U)?'U' :'-');
+  printf("%c", (pte&PTE_G)?'G' :'-');
+  printf("%c", (pte&PTE_A)?'A' :'-');
+  printf("%c", (pte&PTE_D)?'D' :'-');
+}
+
+static void vmprintwalk(pagetable_t pagetable, int level) 
+{
+  for(int i = 0; i < 512; i++) {
+    pte_t pte = pagetable[i];
+    if((pte & PTE_V) == 0)
+      continue;
+    uint64 pa = PTE2PA(pte);
+    int indent = (2 - level) * 2;
+    for(int k = 0; k < indent; k++)
+      printf(" ");
+    printf("%d: pte=0x%lx pa=0x%lx", i, pte, pa);
+    print_pte_flags(pte);
+    printf("\n");
+
+    if(level > 0 && (pte & (PTE_R|PTE_W|PTE_X))==0){
+      pagetable_t child = (pagetable_t)pa;
+      vmprintwalk(child, level - 1);
+    }
+  }
+}
+
+void vmprint(pagetable_t pagetable)
+{
+  printf("page table %p\n", pagetable);
+  vmprintwalk(pagetable, 2);
 }

@@ -7,6 +7,7 @@
 #include "proc.h"
 #include "vm.h"
 
+// 包装参数成为系统调用
 uint64
 sys_exit(void)
 {
@@ -106,4 +107,29 @@ sys_uptime(void)
   xticks = ticks;
   release(&tickslock);
   return xticks;
+}
+
+uint64
+sys_freemem(void)
+{
+  return freemem();
+}
+
+//为什么不用担心页表在遍历过程中被释放？
+uint64 
+sys_vmprint(void)
+{
+  struct proc* p = myproc();
+  vmprint(p -> pagetable);
+  return 0;
+}
+
+uint64
+sys_waitstat(void)
+{
+  uint64 p;
+  uint64 pp;
+  argaddr(0, &p);
+  argaddr(1, &pp);
+  return kwaitstat(p, pp);
 }

@@ -105,3 +105,23 @@ uptime:
  li a7, SYS_uptime
  ecall
  ret
+.global freemem
+freemem:
+ li a7, SYS_freemem
+ ecall
+ ret
+.global vmprint
+vmprint:
+ li a7, SYS_vmprint
+ ecall
+ ret
+.global waitstat
+waitstat:
+ li a7, SYS_waitstat
+ ecall
+ ret
+.global saveqtable
+saveqtable:
+ li a7, SYS_saveqtable
+ ecall
+ ret

@@ -188,7 +188,7 @@ void
 consoleinit(void)
 {
   initlock(&cons.lock, "cons");
-
+  //初始化
   uartinit();
 
   // connect read and write system calls

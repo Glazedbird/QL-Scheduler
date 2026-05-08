@@ -42,3 +42,7 @@ entry("getpid");
 entry("sbrk");
 entry("pause");
 entry("uptime");
+entry("freemem");
+entry("vmprint");
+entry("waitstat");
+entry("saveqtable");

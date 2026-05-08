@@ -171,6 +171,11 @@ clockintr()
     release(&tickslock);
   }
 
+  // RL change
+  // 并没有考虑SLEEP等其他状态的情况
+  // 并且从时序上真的合理吗
+  update_sched_stats();
+
   // ask for the next timer interrupt. this also clears
   // the interrupt request. 1000000 is about a tenth
   // of a second.

@@ -28,7 +28,10 @@ OBJS = \
   $K/sysfile.o \
   $K/kernelvec.o \
   $K/plic.o \
-  $K/virtio_disk.o
+  $K/virtio_disk.o \
+  $K/rl.o \
+  $K/rand.o \
+  $K/qtable_store.o \
 
 # riscv64-unknown-elf- or riscv64-linux-gnu-
 # perhaps in /opt/riscv/bin
@@ -145,7 +148,15 @@ UPROGS=\
 	$U/_logstress\
 	$U/_forphan\
 	$U/_dorphan\
-
+	$U/_saveq\
+	$U/_test\
+	$U/_workload\
+	$U/_cpu_long\
+	$U/_cpu_short\
+	$U/_mixed_job\
+	$U/_sleepy_job\
+	$U/_showqtable\
+	
 fs.img: mkfs/mkfs README $(UPROGS)
 	mkfs/mkfs fs.img README $(UPROGS)
 
