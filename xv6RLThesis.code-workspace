@@ -1,7 +1,15 @@
 {
   "folders": [
-    { "name": "xv6", "path": "xv6" },
-    { "name": "thesis", "path": "thesis" }
+    {
+      "name": "xv6",
+      "path": "xv6"
+    },
+    {
+      "path": ".git"
+    },
+    {
+      "path": "thesis"
+    }
   ],
   "settings": {
     "latex-workshop.latex.tools": [
