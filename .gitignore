@@ -33,3 +33,5 @@ user/usys.S
 .gdbinit
 TAGS
 
+xv6RLThesis.code-workspace
+thesis
